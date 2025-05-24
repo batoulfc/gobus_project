@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Settings - Go Bus</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    html, body { height: 100%; margin: 0; }
+    body { background: linear-gradient(135deg, #0a2683, #8dffb9); font-family: 'Segoe UI', sans-serif; }
+    html.dark body { background: linear-gradient(135deg, #0f0f0f, #1f2937); }
+    .container { display: flex; height: 100vh; width: 100vw; overflow: hidden; }
+    body::-webkit-scrollbar { display: none; }
+    body { -ms-overflow-style: none; scrollbar-width: none; }
+    .container::-webkit-scrollbar, main::-webkit-scrollbar { display: none; }
+    .container, main { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
+</head>
+<body class="text-gray-800 dark:text-gray-100 transition-colors duration-300 relative">
+
+  <button onclick="toggleSidebar()" class="fixed top-6 left-6 z-50 bg-blue-700 text-white p-2 rounded-full shadow-lg hover:bg-blue-800">☰</button>
+  <div id="overlay" class="fixed inset-0 bg-black bg-opacity-30 hidden z-40" onclick="toggleSidebar()"></div>
+
+  <div class="container">
+    <aside id="sidebar" class="fixed top-0 left-0 w-64 bg-white dark:bg-gray-900 p-6 h-full transform -translate-x-full transition-transform duration-300 z-50">
+      <h1 class="text-2xl font-bold text-blue-700 dark:text-yellow-400 mb-10">Go Bus</h1>
+      <nav class="flex flex-col gap-4 text-gray-700 dark:text-gray-300">
+        <a href="book.html" class="flex items-center gap-3 hover:text-blue-600 dark:hover:text-yellow-400"><img src="bus-ticket.png" class="w-5 h-5"/> Book Bus</a>
+        <a href="table.html" class="flex items-center gap-3 hover:text-blue-600 dark:hover:text-yellow-400"><img src="calendar.png" class="w-5 h-5"/> Bus Schedule</a>
+        <a href="gpsst.html" class="flex items-center gap-3 hover:text-blue-600 dark:hover:text-yellow-400"><img src="bus.png" class="w-5 h-5"/> Track Bus</a>
+        <a href="reportst.html" class="flex items-center gap-3 hover:text-blue-600 dark:hover:text-yellow-400"><img src="report.png" class="w-5 h-5"/> Report Issue</a>
+        <a href="notifst.html" class="flex items-center gap-3 hover:text-blue-600 dark:hover:text-yellow-400"><img src="notification.png" class="w-5 h-5"/> Notifications</a>
+        <div class="mt-10 border-t border-gray-300 dark:border-gray-700 pt-4">
+          <a href="settings.html" class="flex items-center gap-3 text-blue-700 dark:text-yellow-400 font-bold"><img src="settings.png" class="w-5 h-5"/> Settings</a>
+          <a href="index.html" class="flex items-center gap-3 hover:text-red-500 mt-3"><img src="log-out.png" class="w-5 h-5"/> Log Out</a>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="flex-1 p-10 overflow-auto ml-0 lg:ml-64">
+      <h2 class="text-3xl font-semibold mb-6">Settings</h2>
+
+      <input type="text" placeholder="Search settings..." oninput="filterSettings(this.value)"
+        class="w-full p-3 mb-6 rounded-lg shadow dark:bg-gray-800 dark:text-white outline-none" />
+
+      <div id="settings-list" class="flex flex-col gap-6">
+
+        <form action="settings.php" method="POST" class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow">
+          <h3 class="text-xl font-bold mb-2">Change Name</h3>
+          <input type="text" name="name" placeholder="New name" required class="w-full p-2 rounded mb-2 dark:bg-gray-700" />
+          <button type="submit" name="name_submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Save</button>
+        </form>
+
+        <form action="settings.php" method="POST" class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow">
+          <h3 class="text-xl font-bold mb-2">Change Email</h3>
+          <input type="email" name="email" placeholder="New email" required class="w-full p-2 rounded mb-2 dark:bg-gray-700" />
+          <button type="submit" name="email_submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Save</button>
+        </form>
+
+        <form action="settings.php" method="POST" class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow">
+          <h3 class="text-xl font-bold mb-2">Change Password</h3>
+          <input type="password" name="password" placeholder="New password" required class="w-full p-2 rounded mb-2 dark:bg-gray-700" />
+          <button type="submit" name="password_submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Save</button>
+        </form>
+
+        <div class="flex items-center justify-between bg-white dark:bg-gray-800 p-6 rounded-xl shadow">
+          <button onclick="history.back()" class="bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700">← Back</button>
+          <button onclick="document.documentElement.classList.toggle('dark')" class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600">Toggle Dark Mode</button>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('overlay');
+      sidebar.classList.toggle('-translate-x-full');
+      overlay.classList.toggle('hidden');
+    }
+
+    function filterSettings(query) {
+      const items = document.querySelectorAll("#settings-list > form, #settings-list > div");
+      items.forEach(item => {
+        item.style.display = item.innerText.toLowerCase().includes(query.toLowerCase()) ? 'block' : 'none';
+      });
+    }
+  </script>
+</body>
+</html>

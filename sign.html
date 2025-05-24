@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Go Bus Roles</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      padding: 0;
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #0a2683, #8dffb9);
+      transition: background 0.4s ease, color 0.4s ease;
+      color: #222;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .dark-mode {
+      background: #111;
+      color: #f3ebeb;
+    }
+
+    .header {
+      width: 100%;
+      max-width: 1000px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      margin: 10px;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+      color: #fca311;
+      text-decoration: none;
+      user-select: none;
+      
+    }
+
+    .dark-mode .logo {
+      color: #f0f0f0;
+    }
+
+    .dark-toggle {
+      background: none;
+      border: 2px solid #fca311;
+      border-radius: 10px;
+      padding: 8px 14px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: all 0.3s ease;
+      user-select: none;
+    }
+
+    .dark-toggle:hover {
+      background-color:  #131646c2;
+      color: #fff;
+    }
+
+    .dark-mode .dark-toggle {
+      border-color: #f0f0f0;
+      color: #f0f0f0;
+    }
+
+    .dark-mode .dark-toggle:hover {
+      background-color: #f0f0f0;
+      color: #111;
+    }
+
+    .main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      max-width: 1000px;
+      padding: 20px;
+    }
+
+    .main h1 {
+      font-weight: 800;
+      color: #fca311;
+      font-size: 36px;
+      margin-bottom: 25px;
+      user-select: none;
+    }
+
+    .dark-mode .main h1 {
+      color: #f0f0f0;
+    }
+
+    .cards {
+      display: flex;
+      gap: 90px;
+      flex-wrap: wrap;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .card {
+      background: rgba(240, 238, 236, 0.281);
+      border-radius: 20px;
+      padding: 30px;
+      width: 260px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 32px rgba(232, 253, 140, 0.315);
+      text-align: center;
+      transition: transform 0.3s ease, opacity 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 12px 48px rgba(243, 243, 243, 0.3);
+    }
+
+    .card img {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
+      margin-bottom: 15px;
+      filter: drop-shadow(1px 1px 1px rgba(236, 112, 11, 0.623));
+      user-select: none;
+    }
+
+    .card h2 {
+      font-size: 24px;
+      margin-bottom: 10px;
+      color: #1231e6be;
+    }
+
+    .dark-mode .card h2 {
+      color: #f0f0f0;
+    }
+
+    .card p {
+      font-size: 15px;
+      color: #07073f;
+    }
+
+    .dark-mode .card p {
+      color: #ccc;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .form-container {
+      background: rgba(255, 255, 255, 0.199);
+      border-radius: 20px;
+      padding: 40px;
+      width: 350px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      user-select: none;
+    }
+
+    .form-container h2 {
+      margin-bottom: 20px;
+      text-align: center;
+      color: #222380;
+    }
+
+    .dark-mode .form-container h2 {
+      color: #f0f0f0;
+    }
+
+    .form-container input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border-radius: 10px;
+      border: none;
+      background: #ffe8b0;
+      font-size: 15px;
+      color: #222;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    .form-container input::placeholder {
+      color: #555;
+    }
+
+    .dark-mode .form-container input {
+      background: rgba(255,255,255,0.1);
+      color: #f0f0f0;
+    }
+
+    .dark-mode .form-container input::placeholder {
+      color: #bbb;
+    }
+
+    .form-container button {
+      width: 100%;
+      padding: 12px;
+      background: #14213d;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      user-select: none;
+    }
+
+    .form-container button:hover {
+      background: #26406e;
+    }
+
+    .back-btn {
+      background: transparent;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      margin-top: 15px;
+      display: flex;
+      justify-content: center;
+      color: #333;
+      transition: color 0.3s ease;
+      user-select: none;
+    }
+
+    .back-btn:hover {
+      color: #000;
+    }
+
+    .dark-mode .back-btn {
+      color: #f0f0f0;
+    }
+
+    .dark-mode .back-btn:hover {
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <a class="logo" href="index.html">Go Bus</a>
+    <button class="dark-toggle" onclick="toggleDarkMode()">Dark Mode</button>
+  </div>
+
+  <div class="main">
+    <h1>Choose Your Role</h1>
+
+    <div class="cards" id="roleCards">
+      <div class="card" onclick="showForm('Student')">
+        <img src="student.png" alt="Student" />
+        <h2>Student</h2>
+        <p>View schedules and reserve your seat.</p>
+      </div>
+      <div class="card" onclick="showForm('Driver')">
+        <img src="driver.png" alt="Driver" />
+        <h2>Driver</h2>
+        <p>Manage your route and availability.</p>
+      </div>
+      <div class="card" onclick="showForm('Admin')">
+        <img src="businessman.png" alt="Admin" />
+        <h2>Administration </h2>
+        <p>Control the whole system securely.</p>
+      </div>
+    </div>
+
+    <!-- Form starts here -->
+    <div class="form-container hidden" id="registerForm">
+      <h2 id="formTitle">Register</h2>
+
+      <form action="register.php" method="POST">
+        <input type="hidden" name="role" id="roleInput" />
+        <input type="text" name="name" placeholder="Full Name" required />
+        <input type="email" name="email" placeholder="Email Address" required />
+        <input type="password" name="password" placeholder="Password" required />
+        <button type="submit">Register</button>
+      </form>
+
+      <button class="back-btn" onclick="goBack()" title="Back to Roles">&#8592;</button>
+    </div>
+  </div>
+
+  <script>
+    function showForm(role) {
+      document.getElementById("roleCards").classList.add("hidden");
+      const form = document.getElementById("registerForm");
+      form.classList.remove("hidden");
+      document.getElementById("formTitle").innerText = `Register as ${role}`;
+      document.getElementById("roleInput").value = role;
+    }
+
+    function goBack() {
+      document.getElementById("registerForm").classList.add("hidden");
+      document.getElementById("roleCards").classList.remove("hidden");
+    }
+
+    function toggleDarkMode() {
+      document.body.classList.toggle("dark-mode");
+    }
+  </script>
+
+</body>
+</html>

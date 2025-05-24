@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Services Unavailable</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
+
+    body {
+      background: linear-gradient(135deg, #0a2683, #8dffb9);
+      font-family: 'Segoe UI', sans-serif;
+      transition: background 0.4s ease;
+    }
+
+    html.dark body {
+      background: linear-gradient(135deg, #0f0f0f, #1f2937);
+    }
+
+    .container {
+      display: flex;
+      height: 100vh;
+      width: 100vw;
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body class="text-gray-800 dark:text-gray-100 transition-colors duration-300 relative">
+  
+  <button onclick="toggleSidebar()" class="fixed top-6 left-6 z-50 bg-blue-700 text-white p-2 rounded-full shadow-lg hover:bg-blue-800">
+    ☰
+  </button>
+
+  <div id="overlay" class="fixed inset-0 bg-black bg-opacity-30 hidden z-40" onclick="toggleSidebar()"></div>
+
+  <div class="container">
+    
+    <aside id="sidebar" class="sidebar fixed top-0 left-0 w-64 bg-white dark:bg-gray-900 p-6 h-full transform -translate-x-full transition-transform duration-300 z-50">
+      <h1 class="text-2xl font-bold text-blue-700 dark:text-yellow-400 mb-10">Go Bus</h1>
+      <nav class="flex flex-col gap-4 text-gray-700 dark:text-gray-300">
+        <a href="book.html" class="flex items-center gap-3 hover:text-blue-600 dark:hover:text-yellow-400">
+          <img src="bus-ticket.png" class="w-5 h-5" alt="book" /> Book Bus
+        </a>
+        <a href="table.html" class="flex items-center gap-3 hover:text-blue-600 dark:hover:text-yellow-400">
+          <img src="calendar.png" class="w-5 h-5" alt="schedule" /> Bus Schedule
+        </a>
+        <a href="gpsst.html" class="flex items-center gap-3 hover:text-blue-600 dark:hover:text-yellow-400">
+          <img src="bus.png" class="w-5 h-5" alt="gps" /> Track Bus
+        </a>
+        <a href="reportst.html" class="flex items-center gap-3 hover:text-blue-600 dark:hover:text-yellow-400">
+          <img src="report.png" class="w-5 h-5" alt="report" /> Report Issue
+        </a>
+        <a href="notifst.html" class="flex items-center gap-3 hover:text-blue-600 dark:hover:text-yellow-400">
+          <img src="notification.png" class="w-5 h-5" alt="notif" /> Notifications
+        </a>
+        <div class="mt-10 border-t border-gray-300 dark:border-gray-700 pt-4">
+          <a href="settings.html" class="flex items-center gap-3 hover:text-blue-600 dark:hover:text-yellow-400">
+            <img src="settings.png" class="w-5 h-5" alt="settings" /> Settings
+          </a>
+          <a href="index.html" class="flex items-center gap-3 hover:text-red-500 mt-3">
+            <img src="log-out.png" class="w-5 h-5" alt="logout" /> Log Out
+          </a>
+        </div>
+      </nav>
+    </aside>
+
+    
+    <main class="flex-1 p-10 overflow-auto ml-0 lg:ml-64 flex items-center justify-center">
+      <div class="bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 p-8 rounded-2xl shadow-xl text-center max-w-xl w-full">
+        <h1 class="text-3xl font-bold mb-6 text-red-600 dark:text-red-400">Service Unavailable</h1>
+        <p class="text-lg mb-2">Bus services are temporarily unavailable as the academic year has ended.</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mb-6">We will resume operation at the start of the next academic year.</p>
+        <hr class="my-6 border-gray-300 dark:border-gray-700" />
+        <h2 class="text-2xl font-bold mb-4 text-red-600 dark:text-red-400" dir="rtl">الخدمة غير متوفرة</h2>
+        <p class="text-lg mb-2" dir="rtl">تم توقيف خدمات الحافلات مؤقتًا لانتهاء العام الدراسي.</p>
+        <p class="text-sm text-gray-600 dark:text-gray-400" dir="rtl"> سيتم استئناف العمل مع بداية العام الدراسي القادم بإذن الله .</p>
+        <a href="student.html" class="inline-block mt-6 px-6 py-2 bg-blue-700 hover:bg-blue-800 text-white rounded-full shadow-md transition duration-200">Back to Home</a>
+      </div>
+    </main>
+  </div>
+
+  
+  <button onclick="document.documentElement.classList.toggle('dark')" class="fixed bottom-6 right-6 bg-gray-800 text-white px-4 py-2 rounded-full shadow-lg hover:bg-gray-700">
+    Dark Mode
+  </button>
+
+  <script>
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('overlay');
+      sidebar.classList.toggle('-translate-x-full');
+      overlay.classList.toggle('hidden');
+    }
+  </script>
+</body>
+</html>
