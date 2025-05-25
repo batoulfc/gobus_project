@@ -13,7 +13,7 @@
   <div class="container">
     <div class="text-section">
 
-      <!-- نموذج تسجيل الدخول -->
+      
       <form id="loginForm" method="POST" action="login.php">
         <h1>Go Bus</h1>
         <p class="description">
@@ -22,7 +22,7 @@
           simplified experience, precise organization, and effective performance.
         </p>
 
-        <!-- رسالة خطأ (تُعرض فقط إذا تم التوجيه بـ ?error=1) -->
+        
         <p id="loginError" style="color:red; display:none;">Invalid email or password.</p>
 
         <input type="email" name="email" placeholder="Email" required />
@@ -35,7 +35,7 @@
         </div>
       </form>
 
-      <!-- نموذج إعادة تعيين كلمة المرور -->
+      
       <form id="forgotForm" style="display:none;">
         <h1>Reset Password</h1>
         <p>Enter your email to reset your password.</p>
@@ -52,7 +52,7 @@
   </div>
 
   <script>
-    // عرض رسالة الخطأ إذا تم التوجيه بـ ?error=1
+    
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.get('error') === '1') {
       document.getElementById('loginError').style.display = 'block';

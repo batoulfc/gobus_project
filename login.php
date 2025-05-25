@@ -50,7 +50,7 @@ if ($user && password_verify($password, $user['password'])) {
     header("Location: $redirect");
     exit;
 } else {
-    // فشل تسجيل الدخول، أعد المستخدم للصفحة مع رسالة
+    
     header("Location: login.html?error=1");
     exit;
 }

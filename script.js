@@ -4,7 +4,7 @@ const forgotPasswordLink = document.getElementById('forgotPasswordLink');
 const backToLogin = document.getElementById('backToLogin');
 const darkToggle = document.getElementById('darkToggle');
 
-// إظهار وإخفاء النماذج
+
 forgotPasswordLink.addEventListener('click', (e) => {
   e.preventDefault();
   loginForm.style.display = 'none';
@@ -16,24 +16,24 @@ backToLogin.addEventListener('click', (e) => {
   loginForm.style.display = 'block';
 });
 
-// تبديل الوضع الليلي
+
 darkToggle.addEventListener('click', () => {
   document.body.classList.toggle('dark');
   darkToggle.textContent = document.body.classList.contains('dark') ? 'Light Mode' : 'Dark Mode';
 });
 
-// التحقق البسيط قبل الإرسال، ثم الإرسال الطبيعي للنموذج
+
 loginForm.addEventListener('submit', (e) => {
   const email = loginForm.querySelector('input[name="email"]').value.trim();
   const password = loginForm.querySelector('input[name="password"]').value;
 
   if (!email || !password) {
-    e.preventDefault(); // نمنع الإرسال فقط إن كانت الحقول فارغة
+    e.preventDefault(); 
     alert('Please fill in all fields');
   }
 });
 
-// إرسال طلب إعادة تعيين كلمة المرور عبر fetch
+
 forgotForm.querySelector('button').addEventListener('click', async (e) => {
   e.preventDefault();
   const email = forgotForm.querySelector('input[type="email"]').value.trim();

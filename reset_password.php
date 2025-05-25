@@ -8,14 +8,14 @@ $pass = "";
 $conn = new mysqli($host, $user, $pass, $db);
 
 if ($conn->connect_error) {
-    echo json_encode(['status' => 'error', 'message' => 'فشل الاتصال بقاعدة البيانات']);
+    echo json_encode(['status' => 'error', 'message' => 'Database connection failed']);
     exit;
 }
 
 $email = $_POST['email'] ?? '';
 
 if (!$email) {
-    echo json_encode(['status' => 'error', 'message' => 'البريد الإلكتروني مطلوب']);
+    echo json_encode(['status' => 'error', 'message' => ' Email address is required']);
     exit;
 }
 
@@ -36,8 +36,8 @@ $table = findUserTable($conn, $email);
 
 if ($table) {
     
-    echo json_encode(['status' => 'success', 'message' => "تم إرسال رابط إعادة تعيين كلمة المرور إلى بريد $table"]);
+    echo json_encode(['status' => 'success', 'message' =>'A password reset link has been sent to your email address']);
 } else {
-    echo json_encode(['status' => 'error', 'message' => 'البريد الإلكتروني غير موجود في أي حساب']);
+    echo json_encode(['status' => 'error', 'message' => 'No account found with this email address']);
 }
 ?>
